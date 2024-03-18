@@ -15,8 +15,8 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ul *ngFor="let task of list">
-      <li>{{task}}</li>
-    </ul>
+    <div class="list-tasks" *ngFor="let task of list">      
+      <ion-checkbox [id]="task.id" labelPlacement="end" (ionChange)="changeItem($event)" [checked]="task.done"><span [class.task-removed]="task.done">{{task.description}}</span></ion-checkbox>      
+    </div>
   </div> 
 </ion-content>

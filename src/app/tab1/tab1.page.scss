@@ -1,9 +1,30 @@
 .content{
     padding: 16px;
+    font-size: 1.3em;
+}
+
+.list-tasks{
+    list-style: none;
 }
 
 .button-add{
     position: absolute;
     right: 26px;
     bottom: 88px;
+}
+
+ion-checkbox {
+
+    --size: 32px;
+    --checkbox-background-checked: #015555;    
+
+    &::part(container) {
+        border-radius: 6px;
+        border: 2px solid #6815ec;
+        
+    }    
+}
+
+.task-removed{
+    text-decoration: line-through;            
 }
