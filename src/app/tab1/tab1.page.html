@@ -20,7 +20,7 @@
       <!-- Casting $event to $any is a temporary fix for this bug https://github.com/ionic-team/ionic-framework/issues/24245 -->
       <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
         <ion-item *ngFor="let task of list">
-            <ion-checkbox [id]="task.id" labelPlacement="end" [checked]="task.done"><span [class.task-removed]="task.done">{{task.description}}</span></ion-checkbox>
+            <ion-checkbox [id]="task.id" labelPlacement="end" (ionChange)="changeItem($event)" [checked]="task.done"><span [class.task-removed]="task.done">{{task.description}}</span></ion-checkbox>
           <ion-reorder slot="end"></ion-reorder>
         </ion-item>
       </ion-reorder-group>
