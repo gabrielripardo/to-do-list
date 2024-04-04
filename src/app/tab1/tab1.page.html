@@ -9,14 +9,23 @@
 <ion-content [fullscreen]="true">
   <div class="content">
     <h1>Lista</h1>
-    
+
     <ion-fab class="button-add" (click)="openModal()">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <div class="list-tasks" *ngFor="let task of list">      
-      <ion-checkbox [id]="task.id" labelPlacement="end" (ionChange)="changeItem($event)" [checked]="task.done"><span [class.task-removed]="task.done">{{task.description}}</span></ion-checkbox>      
-    </div>
-  </div> 
+    <ion-list>
+      <!-- The reorder gesture is disabled by default, enable it to drag and drop items -->
+      <!-- Casting $event to $any is a temporary fix for this bug https://github.com/ionic-team/ionic-framework/issues/24245 -->
+      <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+        <ion-item *ngFor="let task of list">
+          <ion-checkbox [id]="task.id" justify="start" labelPlacement="end" (ionChange)="changeItem($event)" [checked]="task.done">
+            <span [class.task-removed]="task.done">{{task.description}}</span>
+          </ion-checkbox>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+  </div>
 </ion-content>
