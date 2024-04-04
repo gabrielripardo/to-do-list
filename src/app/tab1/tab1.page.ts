@@ -16,8 +16,11 @@ interface ToDo{
 })
 export class Tab1Page {
   list: ToDo[] = [
-    {id: 1, description: "criar app", done: false},
-    {id: 2, description: "criar app 2", done: false}
+    {id: 1, description: "task 0", done: false},
+    {id: 2, description: "task 1", done: false},
+    {id: 3, description: "task 2", done: false},
+    {id: 4, description: "task 3", done: false},
+    {id: 5, description: "task 4", done: false}
   ]
 
   constructor(
@@ -39,7 +42,7 @@ export class Tab1Page {
   }
 
   add(description: string){
-    this.list.push({
+    this.list.unshift({
       id: this.list.length+1,
       description,
       done: false
@@ -47,11 +50,9 @@ export class Tab1Page {
   }
 
   changeItem(event: any){
-    this.list = this.list.map((task: ToDo ) => {
+    this.list.forEach((task: ToDo, index: number ) => {
       if(task.id == event.target.id)
-        return ({...task, done: event.target.checked})
-
-      return task;
+        this.done(task);                                       
       }
     )
   }
@@ -65,5 +66,13 @@ export class Tab1Page {
     // where the gesture ended. This method can also be called directly
     // by the reorder group
     ev.detail.complete();
+  }
+
+  done(task: ToDo){    
+    this.list = [
+      ...this.list.filter((t: ToDo) => !t.done && t.id !== task.id),
+      {...task, done: !task.done},
+      ...this.list.filter((t: ToDo) => t.done && t.id !== task.id),
+    ]
   }
 }
